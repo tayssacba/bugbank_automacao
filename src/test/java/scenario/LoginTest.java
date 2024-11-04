@@ -6,24 +6,28 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import page.CadastroPage;
+import page.LoginPage;
 
 import java.time.Duration;
 
-public class CadastroTest {
+public class LoginTest {
     WebDriver driver;
+    LoginPage loginPage;
     CadastroPage cadastroPage;
 
     @Before
     public void before() {
         driver = new ChromeDriver();
+        loginPage = new LoginPage(driver);
+        cadastroPage = new CadastroPage(driver);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        cadastroPage = new CadastroPage(driver);
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
         driver.get("http://localhost:3000/");
     }
 
     @Test
-    public void testeCadastro() {
+    public void testeLogin() {
         cadastroPage.clicarPorXpath(cadastroPage.btnRegistrar);
         cadastroPage.preencherValor(cadastroPage.campoEmail, "teste@hotmail.com");
         cadastroPage.preencherValor(cadastroPage.campoNome, "Tayssa");
@@ -33,6 +37,11 @@ public class CadastroTest {
         cadastroPage.clicarPorXpath(cadastroPage.btnCadastrar);
         cadastroPage.validarCadastroConta();
         cadastroPage.clicarPorXpath(cadastroPage.btnFechar);
+
+        loginPage.preencherCampo(loginPage.campoEmail, "teste@hotmail.com");
+        loginPage.preencherCampo(loginPage.campoSenha, "Teste123");
+        loginPage.clicarPorXpath(loginPage.btnAcessar);
+        loginPage.validarLogin();
     }
 
     @After

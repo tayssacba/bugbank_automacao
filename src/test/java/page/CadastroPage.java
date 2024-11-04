@@ -9,7 +9,6 @@ public class CadastroPage {
 
     public CadastroPage(WebDriver driver) {
         this.driver = driver;
-
     }
 
     public String btnRegistrar = "//button[contains(text(),'Registrar')]";
@@ -17,8 +16,9 @@ public class CadastroPage {
     public String campoNome = "//body/div[@id='__next']/div[1]/div[2]/div[1]/div[2]/form[1]/div[3]/input[1]";
     public String campoSenha = "//body/div[@id='__next']/div[1]/div[2]/div[1]/div[2]/form[1]/div[4]/div[1]/input[1]";
     public String campoConfSenha = "//body/div[@id='__next']/div[1]/div[2]/div[1]/div[2]/form[1]/div[5]/div[1]/input[1]";
-    public String campoContaSaldoToggle = "//label[@id='toggleAddBalance']";
+    public String campoContaSaldoToggle = "//label[@id='toggleAddBalance']/..";
     public String btnCadastrar = "//button[contains(text(),'Cadastrar')]";
+    public String btnFechar = "//a[@id='btnCloseModal']";
 
     public void preencherValor(String elemento, String valor) {
         driver.findElement(By.xpath(elemento)).sendKeys(valor);
@@ -26,6 +26,10 @@ public class CadastroPage {
 
     public void clicarPorXpath(String elemento) {
         driver.findElement(By.xpath(elemento)).click();
+    }
+
+    public void clicarToogleSaldo() {
+        driver.findElement(By.xpath(campoContaSaldoToggle)).click();
     }
 
     public void validarCadastroConta() {
