@@ -30,7 +30,14 @@ public class LoginPage {
     public void validarLogin() {
         Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(d -> d.getCurrentUrl().contains("/home"));
-        Assert.assertTrue("Erro na validação da homepage", driver.getCurrentUrl().equals("http://localhost:3000/home"));
+        //Assert.assertTrue("Erro na validação da homepage", driver.getCurrentUrl().equals("http://localhost:3000/home"));
         Assert.assertTrue(driver.getCurrentUrl().equals("http://localhost:3000/home"));
+    }
+
+    public void fazerLogin(String email, String senha){
+        preencherCampo(campoEmail, email);
+        preencherCampo(campoSenha, senha);
+        clicarPorXpath(btnAcessar);
+        validarLogin();
     }
 }
