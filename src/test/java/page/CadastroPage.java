@@ -3,6 +3,10 @@ package page;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class CadastroPage {
     WebDriver driver;
@@ -29,7 +33,9 @@ public class CadastroPage {
     }
 
     public void clicarToogleSaldo() {
-        driver.findElement(By.xpath(campoContaSaldoToggle)).click();
+        Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+        wait.until(d -> d.findElement(By.xpath(campoContaSaldoToggle)).isDisplayed());
+        driver.findElement(By.xpath(campoContaSaldoToggle)).findElement(By.tagName("span")).click();
     }
 
     public void validarCadastroConta() {
